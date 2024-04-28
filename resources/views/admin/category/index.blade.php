@@ -3,8 +3,14 @@
 <div class="container card">
     <h1>Categories</h1>
     @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
+   
+    <div class="alert alert-success alert-dismissible show fade">
+        <div class="alert-body">
+            <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            {{ session('success') }}
+        </div>
     </div>
     @endif
     @if (session('error'))
@@ -36,7 +42,9 @@
                             @endif
                         </td>
                         <td>
-                            <a href=""></a>
+                            <a href="/admin/edit-category/{{$category->id}}" class="btn btn-info"><i class="fa fa-edit"></i></a>
+
+                            <a href="/admin/delete-category/{{$category->id}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     @endforeach

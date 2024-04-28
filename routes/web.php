@@ -19,11 +19,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/dashboard', [AdminController::class, 'index']);
     
+    // category routes
     Route::get('/category', [CategoryController::class, 'index']);
     Route::get('/create-category', [CategoryController::class, 'create']);
+    Route::get('/edit-category/{id}', [CategoryController::class, 'edit']);
     Route::post('/category/store', [CategoryController::class, 'store']);
+    Route::post('/category/update/{id}', [CategoryController::class, 'update']);
+    Route::get('/delete-category/{id}', [CategoryController::class, 'destroy']);
 
-
+    // product routes
 
 });
 
