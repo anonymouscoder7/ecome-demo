@@ -31,7 +31,6 @@ class CategoryController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:50',
-            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
             'image' => 'required',
         ]);
 

@@ -1,7 +1,8 @@
 @extends('admin.layout.main')
+
 @section('content')
 <div class="container card">
-    <h1>Categories</h1>
+    <h1>Products</h1>
     @if (session('success'))
 
     <div class="alert alert-success alert-dismissible show fade">
@@ -26,30 +27,38 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Image</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Discounted Price</th>
+                        <th>Description</th>
+                        <th>Stock</th>
+                        <th>Featured</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $key=>$category)
+                    @foreach($products as $key=>$product)
                     <tr>
                         <td>{{ ++$key }}</td>
-                        <td>{{ $category->name }}</td>
+                        <td>{{ $product->name }}</td>
                         <td>
-                            @if ($category->image)
-                            <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" width="50">
-                            @else
-                            No image
-                            @endif
+                            <img src="{{ asset($product->image) }}" alt="Product Image" width="50">
                         </td>
+                        <td>{{ $product->category->name }}</td>
+                        <td>Rs {{ $product->price }}</td>
+                        <td>Rs {{ $product->descounted_price}}</td>
+                        <td>{{ $product->description }}</td>
+                        <td>{{ $product->stock }}</td>
+                        <td>{{ $product->featured ? 'Yes' : 'No' }}</td>
                         <td>
-                            <a href="/admin/edit-category/{{$category->id}}" class="btn btn-info"><i class="fa fa-edit"></i></a>
-
-                            <a href="/admin/delete-category/{{$category->id}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                            <a href="/admin/edit-product/{{$product->id}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                            <a href="/admin/delete-product/{{$product->id}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>
