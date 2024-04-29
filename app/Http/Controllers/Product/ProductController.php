@@ -47,8 +47,8 @@ class ProductController extends Controller
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $imageName = time() . '.' . $image->getClientOriginalName();
-                $image->move('images/image', $imageName);
-                $product->image = 'images/image/' . $imageName;
+                $image->move('images/product', $imageName);
+                $product->image = 'images/product/' . $imageName;
             }
             $product->category_id = $request->category_id;
             $product->price = $request->price;
@@ -95,8 +95,8 @@ class ProductController extends Controller
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $imageName = time() . '.' . $image->getClientOriginalName();
-                $image->move('images/image', $imageName);
-                $product->image = 'images/image/' . $imageName;
+                $image->move('images/product', $imageName);
+                $product->image = 'images/product/' . $imageName;
             }
             $product->category_id = $request->category_id;
             $product->price = $request->price;
