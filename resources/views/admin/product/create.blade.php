@@ -5,10 +5,10 @@
     <div class="card">
         <h3>Create Product</h3>
         @if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-    @endif
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
         <div class="card-body">
             <form action="/admin/product/store" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -22,7 +22,7 @@
 
                 <div class="form-group">
                     <label for="image">Image</label>
-                    <input type="file" class="form-control-file @error('image') is-invalid @enderror" id="image" name="image">
+                    <input type="file" class="form-control-file @error('image') is-invalid @enderror" id="image" name="image" required>
                     @error('image')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label for="category_id">Category</label>
                     <select class="form-control @error('category_id') is-invalid @enderror" id="category_id" name="category_id">
-                        <option value="">Select Category</option>
+                        <option selected disabled>Select Category</option>
                         @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach

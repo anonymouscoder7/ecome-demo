@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 // frontend routes
 // landing page
 Route::get('/', [FrontendController::class, 'index']);
+Route::get('/products', [FrontendController::class, 'product']);
+
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

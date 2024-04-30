@@ -38,7 +38,7 @@
             <div class="header-top">
                 <div class="container">
                     <div class="header-left">
-                        <a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a>
+                        <a href="tel:#"><i class="icon-phone"></i>Call: +977-9862220799</a>
                     </div><!-- End .header-left -->
 
                     <div class="header-right">
@@ -47,8 +47,11 @@
                             <li>
                                 <a href="#">Links</a>
                                 <ul>
-
-                                    <li><a href="/login" >Sign in / Sign up</a></li>
+                                    @if(auth()->user())
+                                    <li><a href="/home">Dashboard</a></li>
+                                    @else
+                                    <li><a href="/login">Sign in / Sign up</a></li>
+                                    @endif
                                 </ul>
                             </li>
                         </ul><!-- End .top-menu -->
@@ -85,7 +88,7 @@
 
                     <div class="header-right">
                         <div class="dropdown compare-dropdown">
-                           
+
 
                             <div class="dropdown-menu dropdown-menu-right">
                                 <ul class="compare-products">
@@ -185,17 +188,15 @@
                             <div class="dropdown-menu">
                                 <nav class="side-nav">
                                     <ul class="menu-vertical sf-arrows">
-                                        <li class="item-lead"><a href="#">Daily offers</a></li>
-                                        <li class="item-lead"><a href="#">Gift Ideas</a></li>
-                                        <li><a href="#">Beds</a></li>
-                                        <li><a href="#">Lighting</a></li>
-                                        <li><a href="#">Sofas & Sleeper sofas</a></li>
-                                        <li><a href="#">Storage</a></li>
-                                        <li><a href="#">Armchairs & Chaises</a></li>
-                                        <li><a href="#">Decoration </a></li>
-                                        <li><a href="#">Kitchen Cabinets</a></li>
-                                        <li><a href="#">Coffee & Tables</a></li>
-                                        <li><a href="#">Outdoor Furniture </a></li>
+                                        <?php
+
+                                        use App\Models\Category;
+
+                                        $categories = Category::all();
+                                        ?>
+                                        @foreach($categories as $cat)
+                                        <li><a href="#">{{$cat->name}}</a></li>
+                                        @endforeach
                                     </ul><!-- End .menu-vertical -->
                                 </nav><!-- End .side-nav -->
                             </div><!-- End .dropdown-menu -->
@@ -206,31 +207,29 @@
                         <nav class="main-nav">
                             <ul class="menu sf-arrows">
                                 <li class="megamenu-container active">
-                                    <a href="index.html">Home</a>
-
-                                    
+                                    <a href="/">Home</a>
                                 </li>
                                 <li>
-                                    <a href="category.html" class="sf-with-ul">Shop</a>
+                                    <a href="">About</a>
 
-                                  
+
                                 </li>
                                 <li>
-                                    <a href="product.html" class="sf-with-ul">Product</a>
+                                    <a href="/products">Product</a>
 
-                                  
+
                                 </li>
                                 <li>
-                                    <a href="#" class="sf-with-ul">Pages</a>
+                                    <a href="#">Contact</a>
 
-                                    
+
                                 </li>
-                              
+
                             </ul><!-- End .menu -->
                         </nav><!-- End .main-nav -->
                     </div><!-- End .header-center -->
 
-                  
+
                 </div><!-- End .container -->
             </div><!-- End .header-bottom -->
         </header><!-- End .header -->
