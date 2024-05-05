@@ -10,17 +10,27 @@ use Illuminate\Http\Request;
 class FrontendController extends Controller
 {
     // landing page
-    public function index(){
-        $latestcategories = Category::orderBy('id','desc')->get();
-        $latestproducts = Product::orderBy('id','desc')->take(15)->get();
-        $featuredproducts = Product::where('featured',1)->get();
-        return view('frontend.index',compact('latestcategories','latestproducts','featuredproducts'));
+    public function index()
+    {
+        $latestcategories = Category::orderBy('id', 'desc')->get();
+        $latestproducts = Product::orderBy('id', 'desc')->take(15)->get();
+        $featuredproducts = Product::where('featured', 1)->get();
+        return view('frontend.index', compact('latestcategories', 'latestproducts', 'featuredproducts'));
     }
 
     // products
-    public function product(){
-        $categories = Category::orderBy('id','desc')->get();
-        $products = Product::orderBy('id','desc')->paginate(12);
-        return view('frontend.product.index',compact('categories','products'));
+    public function product()
+    {
+        $categories = Category::orderBy('id', 'desc')->get();
+        $products = Product::orderBy('id', 'desc')->paginate(12);
+        return view('frontend.product.index', compact('categories', 'products'));
+    }
+
+    // product details
+    public function viewProduct($id)
+    {
+        $product = Product::find($id);
+        $categories = Category::orderBy('id', 'desc')->get();
+        return view('frontend.product.details', compact('categories', 'product'));
     }
 }

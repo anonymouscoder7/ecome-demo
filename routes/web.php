@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 // landing page
 Route::get('/', [FrontendController::class, 'index']);
 Route::get('/products', [FrontendController::class, 'product']);
+Route::get('/product-details/{id}', [FrontendController::class, 'viewProduct']);
+
 
 
 Auth::routes();

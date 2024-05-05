@@ -34,7 +34,7 @@
                         <div class="col-6 col-md-4 col-lg-4 col-xl-3">
                             <div class="product product-7 text-center">
                                 <figure class="product-media">
-                                    <a href="product.html">
+                                    <a href="/product-details/{{$product->id}}">
                                         <img src="{{asset($product->image)}}" alt="Product image" class="product-image">
                                     </a>
 
@@ -54,7 +54,7 @@
                                     <div class="product-cat">
                                         <a href="#">{{$product->category->name}}</a>
                                     </div><!-- End .product-cat -->
-                                    <h3 class="product-title"><a href="product.html">{{$product->name}}</a></h3>
+                                    <h3 class="product-title"><a href="/product-details/{{$product->id}}">{{$product->name}}</a></h3>
                                     <div class="product-price">
                                         @if($product->descounted_price != null)
                                         Rs {{$product->descounted_price}}
