@@ -23,7 +23,7 @@
                 <div class="product-gallery product-gallery-vertical">
                     <div class="row">
                         <figure class="product-main-image">
-                            <img id="product-zoom" src="{{asset($product->image)}}" data-zoom-image="{{asset($product->image)}}" alt="product image">
+                            <img id="product-zoom" src="{{asset($product->image)}}" data-zoom-image="{{asset($product->image)}}" alt="product image" style="height: 400px; object-fit:cover;">
 
                             <a href="#" id="btn-product-gallery" class="btn-product-gallery">
                                 <i class="icon-arrows"></i>
