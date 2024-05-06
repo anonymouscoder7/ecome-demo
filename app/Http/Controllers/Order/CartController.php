@@ -18,11 +18,11 @@ class CartController extends Controller
             $cart = new Cart();
             $cart->user_id = auth()->user()->id;
             $cart->product_id = $request->product_id;
-            $cart->quntity = $request->qty;
+            $cart->quantity = $request->qty;
             $cart->save();
             return back();
         } catch (\Throwable $th) {
-            //throw $th;
+            // throw $th;
         }
     }
 

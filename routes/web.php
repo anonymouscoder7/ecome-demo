@@ -53,6 +53,5 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/pay-with-khalti/{price}/{id}', [OrderController::class, 'payWithKhalti']);
 
-
     Route::get('/change-order-status/{id}', [OrderController::class, 'changeOrderStatus']);
 });

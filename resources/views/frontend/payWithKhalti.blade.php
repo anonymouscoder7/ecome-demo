@@ -6,7 +6,7 @@
 <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
 
 <div class="d-flex my-5  justify-content-center">
-    <button id="payment-button">Pay with Khalti</button>
+    <button id="payment-button" class="btn btn-primary">Pay with Khalti</button>
 </div>
 
 

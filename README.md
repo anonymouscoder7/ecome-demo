@@ -1,7 +1,6 @@
 order
     name
     contact
-    email
     address
     note
     total

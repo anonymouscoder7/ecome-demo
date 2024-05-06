@@ -19,7 +19,6 @@ class OrderController extends Controller
         $order->contact = $request->contact;
         $order->note = $request->note;
         $order->payment_method = $request->payment_method;
-
         $order->save();
 
         $carts = Cart::where('user_id', auth()->user()->id)->get();
@@ -28,11 +27,15 @@ class OrderController extends Controller
             $order_details = new OrderDetails();
             $order_details->order_id = $order->id;
             $order_details->product_id = $cart->product_id;
+
             $product = Product::find($cart->product_id);
+            
             $order_details->quantity = $cart->quantity;
             $order_details->unit_price = $product->price;
             $order_details->save();
+
             $cart->delete();
+            
             $total += $order_details->quantity * $order_details->unit_price;
         }
 
