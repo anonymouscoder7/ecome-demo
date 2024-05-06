@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<!-- molla/index-4.html  22 Nov 2019 09:53:08 GMT -->
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -69,7 +66,7 @@
                         </button>
 
                         <a href="index.html" class="logo">
-                            <img src="assets/images/demos/demo-4/logo.png" alt="Molla Logo" width="105" height="25">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHdOzEUA13lqbi9KkXg4TgHQMPlUZfFTuvotlE2w5MOA&s" alt="Molla Logo" width="105" height="25">
                         </a>
                     </div><!-- End .header-left -->
 
@@ -108,71 +105,66 @@
                                 </div>
                             </div><!-- End .dropdown-menu -->
                         </div><!-- End .compare-dropdown -->
+                        @php 
+                        use App\Models\Cart;
+                        @endphp
+                        @if(auth()->user())
 
+                        <?php
+                        $carts = Cart::where('user_id', auth()->user()->id)->get();
+                        ?>
+                        @endif
+                        @if(auth()->user())
                         <div class="dropdown cart-dropdown">
                             <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <div class="icon">
                                     <i class="icon-shopping-cart"></i>
-                                    <span class="cart-count">2</span>
+                                    <span class="cart-count">{{$carts->count()}}</span>
                                 </div>
                                 <p>Cart</p>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dropdown-cart-products">
+                                    <?php $total = 0; ?>
+                                    @foreach($carts as $cart)
                                     <div class="product">
                                         <div class="product-cart-details">
                                             <h4 class="product-title">
-                                                <a href="product.html">Beige knitted elastic runner shoes</a>
+                                                <a href="product.html">{{$cart->product->name}}</a>
                                             </h4>
 
                                             <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $84.00
+                                                <span class="cart-product-qty">{{$cart->quantity}}</span>
+                                                x {{$cart->product->price}}
                                             </span>
                                         </div><!-- End .product-cart-details -->
 
                                         <figure class="product-image-container">
                                             <a href="product.html" class="product-image">
-                                                <img src="assets/images/products/cart/product-1.jpg" alt="product">
+                                                <img src="{{asset($cart->product->image)}}" alt="product">
                                             </a>
                                         </figure>
                                         <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
                                     </div><!-- End .product -->
+                                    <?php $total = $total + ($cart->product->price * $cart->quantity); ?>
+                                    @endforeach
 
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="product.html">Blue utility pinafore denim dress</a>
-                                            </h4>
-
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x $76.00
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
-
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="assets/images/products/cart/product-2.jpg" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                                    </div><!-- End .product -->
                                 </div><!-- End .cart-product -->
 
                                 <div class="dropdown-cart-total">
                                     <span>Total</span>
 
-                                    <span class="cart-total-price">$160.00</span>
+                                    <span class="cart-total-price">Rs {{$total}}</span>
                                 </div><!-- End .dropdown-cart-total -->
 
                                 <div class="dropdown-cart-action">
                                     <a href="cart.html" class="btn btn-primary">View Cart</a>
-                                    <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
+                                    <a href="/checkout" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
                                 </div><!-- End .dropdown-cart-total -->
                             </div><!-- End .dropdown-menu -->
                         </div><!-- End .cart-dropdown -->
+                        @endif
                     </div><!-- End .header-right -->
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->

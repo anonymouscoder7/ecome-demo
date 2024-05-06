@@ -54,11 +54,13 @@
                         @endif
                     </div><!-- End .product-price -->
 
-                    <form action="">
+                    <form action="/add-to-cart" method="post">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{$product->id}}">
                         <div class="details-filter-row details-row-size">
                             <label for="qty">Qty:</label>
                             <div class="product-details-quantity">
-                                <input type="number" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                <input type="number" name="qty" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
                             </div><!-- End .product-details-quantity -->
                         </div><!-- End .details-filter-row -->
 
