@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -29,15 +30,29 @@ class OrderController extends Controller
             $order_details->product_id = $cart->product_id;
 
             $product = Product::find($cart->product_id);
-            
+
             $order_details->quantity = $cart->quantity;
             $order_details->unit_price = $product->price;
             $order_details->save();
 
             $cart->delete();
-            
+
             $total += $order_details->quantity * $order_details->unit_price;
         }
+
+        $details = [
+            'title' => 'You Got a New Order',
+            'body' => 'Order From ' . $request->name
+        ];
+
+        Mail::to('admin@gmail.com')->send(new \App\Mail\MailSent($details));
+
+        $details = [
+            'title' => 'Thank you for Order',
+            'body' => 'THank you ',
+        ];
+
+        Mail::to($order->user->email)->send(new \App\Mail\MailSent($details));
 
         if ($request->payment_method == 'khalti') {
             $url = '/pay-with-khalti/' . $total . '/' . $order->id;
@@ -56,6 +71,13 @@ class OrderController extends Controller
         $order  = Order::find($id);
         $order->payment_status = 'paid';
         $order->update();
+
+        $details = [
+            'title' => 'Thank you for Order',
+            'body' => 'THank you '
+        ];
+
+        Mail::to($order->user->email)->send(new \App\Mail\MailSent($details));
 
         return redirect('/');
     }
